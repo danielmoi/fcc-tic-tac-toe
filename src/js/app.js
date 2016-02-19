@@ -4,34 +4,47 @@ function echo(obj) {
 window.echo = console.log.bind(console);
 
 var arrBoard = [],
-  turn;
+  turn,
+    index;
 
 $('.square').click(function () {
   var self = this;
-  var obj = {};
-  obj.index = '';
   $(self).append('<i class="fa fa-times"></i>');
-  checkSquare(self.id);
-  echo('line 14: obj.index: ' + obj.index);
-  playerMove(index);
+  playerMove(self.id);
   computerMove();
 
 });
 
 var arrNames = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
 
-function checkSquare(id) {
+function playerMove(id) {
+  
+  turn = 'playerTurn';
+  
+  // get index from arrNames
   index = arrNames.indexOf(id);
-  obj.index = index;
-  echo('line 23: index: ' + index);
-}
-       
-       
-       
-function playerMove(index) {
+  
+  // check square is occupied by player
+  if (arrBoard[index] === 'player') {
+    echo('you\'re already here');
+    return;
+  }
+  
+  // check if square is occupied by computer
+  if (arrBoard[index] === 'computer') {
+    echo('computer here');
+    return;
+  }
   arrBoard[index] = 'player';
-  echo('line 30: '+ arrBoard);
+  echo(arrBoard);
+  
+  // now allow computer to move
+  turn = 'computerTurn';
+  return;
 }
+
+       
+
 
 function resetBoard() {
   arrBoard = [];
@@ -40,8 +53,12 @@ function resetBoard() {
 }
 
 function computerMove() {
-  var random = Math.floor(Math.random() * 9);
-  echo(random);
+  if (turn === 'computerTurn') {
+    var random = Math.floor(Math.random() * 9);
+    echo('computer move: ' + random);
+    turn = 'playerTurn';
+  }
+  return;
 }
 
 $('.resetBoard').click(function () {
