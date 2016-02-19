@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, 
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  height: 100%;
+}
+
+// TYPOGRAPHY 
+
+
+
+
+// SECTIONS
+
+.header {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.container {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.board {
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+}
+.square {
+  height: 50px;
+  width: 50px;
+  background: lightgray;
+  display: inline-block;
+  margin: 2px;
+  border: 1px solid gray;
+  cursor: pointer;
+  position: relative;
+  
+}
+
+
+// ELEMENTS
+
+.fa {
+  line-height: $square;
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-size: 2em;
+}
