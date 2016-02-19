@@ -46,6 +46,10 @@ body {
   position: relative;
 }
 
+.controls {
+  text-align: center;
+}
+
 .display {
   margin-top: 20px;
   text-align: center;
