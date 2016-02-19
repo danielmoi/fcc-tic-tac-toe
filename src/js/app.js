@@ -13,8 +13,8 @@ var arrBoard = [],
 
 $('.square').click(function () {
   var self = this;
-  $(self).append(iconCross);
   playerMove(self.id);
+
   computerMove();
 
 });
@@ -39,7 +39,15 @@ function playerMove(id) {
     echo('computer here');
     return;
   }
+  
+  // write to arrBoard
   arrBoard[index] = 'player';
+  
+  
+  // draw to screen
+  $('#'+id).append(iconCross);
+  
+  
   echo(arrBoard);
   
   // now allow computer to move
@@ -60,6 +68,13 @@ function computerMove() {
   if (turn === 'computerTurn') {
     var random = Math.floor(Math.random() * 9);
     echo('computer move: ' + random);
+    
+    // convert move to word
+    var index = arrNames[random];
+    echo(index);
+    
+    $('#'+index).append(iconCircle);
+    
     turn = 'playerTurn';
   }
   return;
