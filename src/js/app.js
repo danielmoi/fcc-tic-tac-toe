@@ -5,11 +5,15 @@ window.echo = console.log.bind(console);
 
 var arrBoard = [],
   turn,
-    index;
+    index,
+    playerIcon,
+    computerIcon,
+    iconCross = '<i class="fa fa-times"></i>',
+    iconCircle = '<i class="fa fa-circle-o"></i>';
 
 $('.square').click(function () {
   var self = this;
-  $(self).append('<i class="fa fa-times"></i>');
+  $(self).append(iconCross);
   playerMove(self.id);
   computerMove();
 
