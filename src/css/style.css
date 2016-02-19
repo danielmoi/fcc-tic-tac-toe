@@ -46,6 +46,17 @@ body {
   position: relative;
 }
 
+.display {
+  margin-top: 20px;
+  text-align: center;
+  display: none;
+}
+
+.winner {
+  color: tomato;
+  font-size: 1.5em;
+}
+
 .fa {
   line-height: 50px;
   position: absolute;

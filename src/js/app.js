@@ -6,6 +6,7 @@ window.echo = console.log.bind(console);
 var arrBoard = ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
   turn,
   index,
+    winner = '',
   playerIcon,
   computerIcon,
   iconCross = '<i class="fa fa-times"></i>',
@@ -50,6 +51,7 @@ function playerMove(id) {
   $('#' + id).append(iconCross);
 
   echo(arrBoard);
+  checkBoard();
 
   // now allow computer to move
   turn = 'computerTurn';
@@ -65,12 +67,67 @@ function resetBoard() {
   echo(arrBoard);
 }
 
+function displayWinner(arg) {
+  winner = arg;
+  echo(winner);
+  $('.display').show();
+  $('#winner').text(winner);
+}
+
 function checkBoard() {
   if (arrBoard.indexOf('empty') === -1) {
     echo(arrBoard.length);
     echo('game over');
     return false;
   }
+
+  // rows
+  if (arrBoard[0] === arrBoard[1] && arrBoard[1] === arrBoard[2] && arrBoard[0] !== 'empty') {
+    displayWinner(arrBoard[0]);
+    echo('game over');
+    return false;
+  }
+  if (arrBoard[3] === arrBoard[4] && arrBoard[4] === arrBoard[5] && arrBoard[3] !== 'empty') {
+    displayWinner(arrBoard[3]);
+    echo('game over');
+    return false;
+  }
+  if (arrBoard[6] === arrBoard[7] && arrBoard[7] === arrBoard[8] && arrBoard[6] !== 'empty') {
+    displayWinner(arrBoard[6]);
+    echo('game over');
+    return false;
+  }
+
+  // columns
+  if (arrBoard[0] === arrBoard[3] && arrBoard[3] === arrBoard[6] && arrBoard[0] !== 'empty') {
+    displayWinner(arrBoard[0]);
+    echo('game over');
+    return false;
+  }
+  if (arrBoard[1] === arrBoard[4] && arrBoard[4] === arrBoard[7] && arrBoard[1] !== 'empty') {
+    displayWinner(arrBoard[1]);
+    echo('game over');
+    return false;
+  }
+  if (arrBoard[2] === arrBoard[5] && arrBoard[5] === arrBoard[8] && arrBoard[2] !== 'empty') {
+    displayWinner(arrBoard[2]);
+    echo('game over');
+    return false;
+  }
+
+  // diagonals
+  if (arrBoard[0] === arrBoard[4] && arrBoard[4] === arrBoard[8] && arrBoard[4] !== 'empty') {
+    displayWinner(arrBoard[0]);
+    echo('game over');
+    return false;
+  }
+  if (arrBoard[6] === arrBoard[4] && arrBoard[4] === arrBoard[2] && arrBoard[4] !== 'empty') {
+    displayWinner(arrBoard[6]);
+    echo('game over');
+    return false;
+  }
+
+
   return true;
 }
 
