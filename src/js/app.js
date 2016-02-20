@@ -4,83 +4,93 @@ function echo(obj) {
 window.echo = console.log.bind(console);
 
 var arrBoard = ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+  arrNames = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'],
+
   turn,
+  gameStatus = 'go',
+
+
   index,
-    winner = '',
+  winner,
+
   playerIcon,
   computerIcon,
-  iconCross = '<i class="fa fa-times"></i>',
-  iconCircle = '<i class="fa fa-circle-o"></i>';
+  iconCross = '<span class="icon">X</span>',
+  iconCircle = '<span class="icon">O</span>';
 
 $('.square').click(function () {
-  var self = this;
-  playerMove(self.id);
-
-  computerMove();
-
+  if (gameStatus === 'go') {
+    var self = this;
+    playerMove(self.id);
+    computerMove();
+  }
 });
 
-var arrNames = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
-
 function playerMove(id) {
+  if (gameStatus === 'go') {
 
-  turn = 'playerTurn';
+    turn = 'playerTurn';
 
-  // get index from arrNames
-  index = arrNames.indexOf(id);
+    // get index from arrNames
+    index = arrNames.indexOf(id);
 
-  // check square is occupied by player
-  if (arrBoard[index] === 'player') {
-    echo('you\'re already here');
+    // check square is occupied by player
+    if (arrBoard[index] === 'player') {
+      echo('you\'re already here');
+      return;
+    }
+
+    // check if square is occupied by computer
+    if (arrBoard[index] === 'computer') {
+      echo('computer here');
+      return;
+    }
+
+    // write to arrBoard
+    arrBoard[index] = 'player';
+
+    // draw to screen
+    echo('player move: ' + index);
+    echo('arrBoard[index]: ' + arrBoard[index]);
+
+    $('#' + id).append(iconCross);
+
+    echo(arrBoard);
+    checkBoard();
+
+    // now allow computer to move
+    turn = 'computerTurn';
     return;
   }
-
-  // check if square is occupied by computer
-  if (arrBoard[index] === 'computer') {
-    echo('computer here');
-    return;
-  }
-
-  // write to arrBoard
-  arrBoard[index] = 'player';
-
-  // draw to screen
-  echo('player move: ' + index);
-  echo('arrBoard[index]: ' + arrBoard[index]);
-
-  $('#' + id).append(iconCross);
-
-  echo(arrBoard);
-  checkBoard();
-
-  // now allow computer to move
-  turn = 'computerTurn';
   return;
 }
-
-
-
 
 function resetBoard() {
   arrBoard = ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'];
   $('.square').empty();
+  $('#message').empty();
+  $('.display').hide();
+  turn = '';
+  gameStatus = 'go';
+  winner = ''
   echo(arrBoard);
 }
 
 function displayWinner(arg) {
   winner = arg;
+  gameStatus = 'stop';
   echo(winner);
   $('.display').show();
-  $('#winner').text(winner);
+  $('#message').html('The winner is: <span id="winner" class="winner">' + winner + '</span> !!!');
 }
 
 function checkBoard() {
   if (arrBoard.indexOf('empty') === -1) {
     echo(arrBoard.length);
     echo('game over');
+    $('#message').html('It\'s a <span class="winner">tie</span> !!!');
     return false;
   }
-
   // rows
   if (arrBoard[0] === arrBoard[1] && arrBoard[1] === arrBoard[2] && arrBoard[0] !== 'empty') {
     displayWinner(arrBoard[0]);
@@ -132,8 +142,9 @@ function checkBoard() {
 }
 
 function computerMove() {
-  if (turn === 'computerTurn') {
-    if (checkBoard()) {
+  if (gameStatus === 'go') {
+    if (turn === 'computerTurn') {
+
       do {
         var random = Math.floor(Math.random() * 9);
         echo('random: ' + random);
@@ -151,10 +162,13 @@ function computerMove() {
 
       var indexWord = arrNames[random];
       $('#' + indexWord).append(iconCircle);
+      
+      checkBoard();
 
       turn = 'playerTurn';
     }
   }
+
   return;
 }
 
