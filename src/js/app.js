@@ -3,12 +3,27 @@ function echo(obj) {
 }
 window.echo = console.log.bind(console);
 
+/*
+ TO DO
+ 
+ 1. [ ] Change colour upon hover
+ 2. [ ] Highlight tiles along winning line
+ 3. [ ] Player to choose icon
+ 4. [ ] 1 or 2 player
+ 5. [ ] Who goes first
+ 6. [ ] Add AI
+ 7. [ ] Disable pointer if tile is played already
+ 
+ 
+ 
+ 
+ */
+
 var arrBoard = ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
   arrNames = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'],
 
   turn,
   gameStatus = 'go',
-
 
   index,
   winner,
