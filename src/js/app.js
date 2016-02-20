@@ -6,16 +6,13 @@ window.echo = console.log.bind(console);
 /*
  TO DO
  
- 1. [ ] Change colour upon hover
- 2. [ ] Highlight tiles along winning line
- 3. [ ] Player to choose icon
- 4. [ ] 1 or 2 player
- 5. [ ] Who goes first
- 6. [ ] Add AI
- 7. [ ] Disable pointer if tile is played already
- 
- 
- 
+ 1. [  ] Change colour upon hover
+ 2. [ * ] Highlight tiles along winning line – 160220
+ 3. [  ] Player to choose icon
+ 4. [  ] 1 or 2 player
+ 5. [  ] Who goes first
+ 6. [  ] Add AI
+ 7. [  ] Disable pointer if tile is played already
  
  */
 
@@ -23,15 +20,29 @@ var arrBoard = ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', '
   arrNames = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'],
 
   turn,
-  gameStatus = 'go',
+  gameStatus = 'stop',
 
   index,
   winner,
 
-  playerIcon,
-  computerIcon,
-  iconCross = '<span class="icon">X</span>',
-  iconCircle = '<span class="icon">O</span>';
+  playerMarker,
+  computerMarker,
+  markerCross = '<span class="icon">X</span>',
+  markerCircle = '<span class="icon">O</span>';
+
+$('.x').click(function () {
+  playerMarker = markerCross;
+  computerMarker = markerCircle;
+  $('.choose').hide();
+  gameStatus = 'go';
+});
+
+$('.o').click(function () {
+  playerMarker = markerCircle;
+  computerMarker = markerCross;
+  $('.choose').hide();
+  gameStatus = 'go';
+});
 
 $('.square').click(function () {
   if (gameStatus === 'go') {
@@ -68,7 +79,7 @@ function playerMove(id) {
     echo('player move: ' + index);
     echo('arrBoard[index]: ' + arrBoard[index]);
 
-    $('#' + id).append(iconCross);
+    $('#' + id).append(playerMarker);
 
     echo(arrBoard);
     checkBoard();
@@ -87,9 +98,12 @@ function resetBoard() {
   $('.display').hide();
   $('.square').removeClass('highlight');
   turn = '';
-  gameStatus = 'go';
+  gameStatus = 'stop';
   winner = ''
   echo(arrBoard);
+  playerMarker = '';
+  computerMarker = '';
+  $('.choose').show();
 }
 
 function displayWinner(arg) {
@@ -185,7 +199,7 @@ function computerMove() {
       echo('computer move: ' + random);
 
       var indexWord = arrNames[random];
-      $('#' + indexWord).append(iconCircle);
+      $('#' + indexWord).append(computerMarker);
 
       checkBoard();
 
