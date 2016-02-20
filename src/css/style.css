@@ -56,7 +56,6 @@ body {
 .display {
   margin-top: 20px;
   text-align: center;
-  display: none;
 }
 
 .winner {
@@ -65,13 +64,14 @@ body {
 }
 
 .choose {
-  padding-top: 20px;
   text-align: center;
 }
 
 .x,
 .o {
   margin: 5px;
+  background: tomato;
+  border: tomato 1px solid;
 }
 
 .icon {

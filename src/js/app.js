@@ -35,6 +35,7 @@ $('.x').click(function () {
   computerMarker = markerCircle;
   $('.choose').hide();
   gameStatus = 'go';
+  $('#message').html('Game on!' + '<br>' + 'player marker: <span class="highlight">X</span>');
 });
 
 $('.o').click(function () {
@@ -42,6 +43,11 @@ $('.o').click(function () {
   computerMarker = markerCross;
   $('.choose').hide();
   gameStatus = 'go';
+  $('#message').html('Game on!' + '<br>' + 'player marker: <span class="highlight">O</span>');
+
+
+
+
 });
 
 $('.square').click(function () {
@@ -95,7 +101,6 @@ function resetBoard() {
   arrBoard = ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'];
   $('.square').empty();
   $('#message').empty();
-  $('.display').hide();
   $('.square').removeClass('highlight');
   turn = '';
   gameStatus = 'stop';
@@ -110,7 +115,6 @@ function displayWinner(arg) {
   winner = arg;
   gameStatus = 'stop';
   echo(winner);
-  $('.display').show();
   $('#message').html('The winner is: <span id="winner" class="winner">' + winner + '</span> !!!');
 }
 
