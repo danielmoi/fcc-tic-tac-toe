@@ -81,3 +81,7 @@ button {
 button:focus {
   outline: none;
 }
+
+.highlight {
+  color: tomato;
+}

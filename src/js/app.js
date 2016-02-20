@@ -85,6 +85,7 @@ function resetBoard() {
   $('.square').empty();
   $('#message').empty();
   $('.display').hide();
+  $('.square').removeClass('highlight');
   turn = '';
   gameStatus = 'go';
   winner = ''
@@ -109,15 +110,18 @@ function checkBoard() {
   // rows
   if (arrBoard[0] === arrBoard[1] && arrBoard[1] === arrBoard[2] && arrBoard[0] !== 'empty') {
     displayWinner(arrBoard[0]);
+    $('#zero,#one, #two').addClass('highlight');
     echo('game over');
     return false;
   }
   if (arrBoard[3] === arrBoard[4] && arrBoard[4] === arrBoard[5] && arrBoard[3] !== 'empty') {
+    $('#three,#four, #five').addClass('highlight');
     displayWinner(arrBoard[3]);
     echo('game over');
     return false;
   }
   if (arrBoard[6] === arrBoard[7] && arrBoard[7] === arrBoard[8] && arrBoard[6] !== 'empty') {
+    $('#six,#seven, #eight').addClass('highlight');
     displayWinner(arrBoard[6]);
     echo('game over');
     return false;
@@ -125,16 +129,19 @@ function checkBoard() {
 
   // columns
   if (arrBoard[0] === arrBoard[3] && arrBoard[3] === arrBoard[6] && arrBoard[0] !== 'empty') {
+    $('#zero,#three, #six').addClass('highlight');
     displayWinner(arrBoard[0]);
     echo('game over');
     return false;
   }
   if (arrBoard[1] === arrBoard[4] && arrBoard[4] === arrBoard[7] && arrBoard[1] !== 'empty') {
+    $('#one,#four, #seven').addClass('highlight');
     displayWinner(arrBoard[1]);
     echo('game over');
     return false;
   }
   if (arrBoard[2] === arrBoard[5] && arrBoard[5] === arrBoard[8] && arrBoard[2] !== 'empty') {
+    $('#two,#five, #eight').addClass('highlight');
     displayWinner(arrBoard[2]);
     echo('game over');
     return false;
@@ -142,11 +149,13 @@ function checkBoard() {
 
   // diagonals
   if (arrBoard[0] === arrBoard[4] && arrBoard[4] === arrBoard[8] && arrBoard[4] !== 'empty') {
+    $('#zero,#four, #eight').addClass('highlight');
     displayWinner(arrBoard[0]);
     echo('game over');
     return false;
   }
   if (arrBoard[6] === arrBoard[4] && arrBoard[4] === arrBoard[2] && arrBoard[4] !== 'empty') {
+    $('#six,#four, #two').addClass('highlight');
     displayWinner(arrBoard[6]);
     echo('game over');
     return false;
@@ -177,7 +186,7 @@ function computerMove() {
 
       var indexWord = arrNames[random];
       $('#' + indexWord).append(iconCircle);
-      
+
       checkBoard();
 
       turn = 'playerTurn';
